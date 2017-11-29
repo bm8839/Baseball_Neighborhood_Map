@@ -1,0 +1,51 @@
+/** {
+    border: 1px solid red !important;
+}*/
+
+input {
+font-size: 10px;
+}
+h2 {
+color: #525454;
+margin: auto;
+text-align: center;
+}
+h5 {
+text-align: center;
+font-size: 10px;
+}
+ul {
+list-style-position: inside;
+padding-left:0;
+}
+hr {
+background: #D0D7D9;
+height: 1px;
+margin: 10px 0 10px 0;
+border: none;
+}
+#map {
+bottom:0px;
+height: 100%;
+position: absolute;
+right: 0px;
+margin:auto;
+}
+#pano {
+width: 200px;
+height: 200px;
+}
+#teams {
+float: left;
+overflow-y: auto;
+height: 240px;
+margin: auto;
+}
+#wikipedia {
+float: left;
+overflow-y: auto;
+height: 120px;
+margin: auto;
+}
+
+

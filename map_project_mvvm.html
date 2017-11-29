@@ -1,0 +1,57 @@
+<!-- This web page displays a Google map of the US with all 30 Major League
+Baseball teams marked on the map. It also uses Knockout to list all the
+team names along with a filter box to narrow the list and find a team. Once
+the team is clicked the page displays a list of links to Wikipedia articles
+throught the Wikipedia API. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Neighborhood Map</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0,
+     initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-5" id="left-column">
+                    <h2>Find Your Team</h2>
+                    <div class="row">
+                        <h5>then click on the team</h5>
+                        <label>Filter</label>
+                        <input type="text" id="team-name" placeholder="Type Team name" data-bind="textInput: filter">
+                    </div>
+                    <hr>
+                    <div class="row" id="teams">
+                        <ul id="filtered-list" data-bind="foreach: filteredTeams">
+                            <li data-bind="text: title, click: $parent.setCurrentTeam"></li>
+                        </ul>
+                    </div>
+                    <div class="row" id="buttons">
+                      <input id="show-all" type="button" value="Show All" data-bind="click: showAll">
+                      <input id="hide-all" type="button" value="Hide All" data-bind="click: hideAll">
+                    </div>
+                    <hr>
+                    <div class="row" id="wikipedia-box">
+                        <h3>Wikipedia Articles</h3>
+                    <div class="row" id="wikipedia">
+                        <ul id="wikipedia-links"></ul>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-7" id="map"></div>
+            </div>
+        </div>
+        <script src="js/lib/knockout-3.2.0.js"></script>
+        <script src="js/map_project_mvvm.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhH2S6VnXLtu8rJuaF-39oV8d-tCCe9Qw&v=3&libraries=drawing,geometry,places&callback=viewModel.initMap">
+        </script>
+    </body>
+</html>
