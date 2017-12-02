@@ -21,37 +21,37 @@ throught the Wikipedia API. -->
             <div class="row">
                 <div class="col-xs-5" id="left-column">
                     <h2>Find Your Team</h2>
-                    <div class="row">
+                    <section class="row">
                         <h5>then click on the team</h5>
                         <label>Filter</label>
                         <input type="text" id="team-name" placeholder="Type Team name" data-bind="textInput: filter">
-                    </div>
+                    </section>
                     <hr>
-                    <div class="row" id="teams">
+                    <section class="row" id="teams">
                         <ul id="filtered-list" data-bind="foreach: filteredTeams">
                             <li data-bind="text: title, click: $parent.setCurrentTeam"></li>
                         </ul>
-                    </div>
-                    <div class="row" id="buttons">
+                    </section>
+                    <section class="row" id="buttons">
                       <input id="show-all" type="button" value="Show All" data-bind="click: showAll">
                       <input id="hide-all" type="button" value="Hide All" data-bind="click: hideAll">
-                    </div>
+                    </section>
                     <hr>
-                    <div class="row" id="wikipedia-box">
+                    <section class="row" id="wikipedia-box">
                         <h3>Wikipedia Articles</h3>
-                    <div class="row" id="wikipedia">
+                      <article class="row" id="wikipedia">
                         <ul id="wikipedia-links"></ul>
-                    </div>
-                    </div>
+                      </article>
+                    </section>
                 </div>
 
-                <div class="col-xs-7" id="map"></div>
+                <main class="col-xs-7" id="map"></main>
             </div>
         </div>
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/map_project_mvvm.js"></script>
         <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhH2S6VnXLtu8rJuaF-39oV8d-tCCe9Qw&v=3&libraries=drawing,geometry,places&callback=viewModel.initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhH2S6VnXLtu8rJuaF-39oV8d-tCCe9Qw&v=3&libraries=drawing,geometry,places&callback=viewModel.initMap" onerror="viewModel.mapError()">
         </script>
     </body>
 </html>

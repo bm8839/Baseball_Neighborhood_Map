@@ -173,6 +173,10 @@ var ViewModel = function() {
       // Create an onclick event to open the large infowindow at each marker
       // and get the Wikipedia articles for that specific team.
       marker.addListener('click', function() {
+        var marker = this;
+        self.animationOff();
+        this.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function(){ marker.setAnimation(null); }, 2100);
         self.populateInfoWindow(this, largeInfowindow);
         var team = self.getTeam(this);
         self.loadData(team);
@@ -238,6 +242,10 @@ var ViewModel = function() {
     };
     };
     //end of initMap
+
+    this.mapError = function() {
+      alert("Google Map failed to load");
+    };
 
     // Create a new blank observable array to hold the list of team objects.
     this.teamList = ko.observableArray([]);
