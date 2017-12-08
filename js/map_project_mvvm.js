@@ -241,7 +241,7 @@ var ViewModel = function() {
     }
     };
     };
-    //end of initMap
+    // end of initMap
 
     this.mapError = function() {
       alert("Google Map failed to load");
@@ -249,6 +249,9 @@ var ViewModel = function() {
 
     // Create a new blank observable array to hold the list of team objects.
     this.teamList = ko.observableArray([]);
+
+    // Create a new blank observable array to hold the list of Wikipedia article objects.
+    this.articleList = ko.observableArray([]);
 
     // Loop through the teams array and create a new team object for each
     // team and push it to the teamList observable array.
@@ -301,31 +304,30 @@ var ViewModel = function() {
     // the Wikipedia api and then interfacing with the View creates a list of
     // Wikipedia articles.
     this.loadData = function(team) {
-        var $wikiElem = $('#wikipedia-links');
-        // Clear out old data before new request.
-        $wikiElem.text("");
         // Load wikipedia data.
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch' +
             '&search=' + team.title() + '&format=json&callback=wikiCallback';
-        var wikiRequestTimeout = setTimeout(function(){
-            $wikiElem.text("failed to get wikipedia resources");
-        }, 8000);
-
         $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
-            jsonp: "callback",
-            success: function( response ) {
-                var articleList = response[1];
-                for (var i = 0; i < articleList.length; i++) {
-                    var articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    $wikiElem.append('<li><a href="' + url + '" ' +
-                      ' target="_blank">' + articleStr + '</a></li>');
-                }
-                clearTimeout(wikiRequestTimeout);
+            jsonp: "callback"
+        }).done(function(response, textStatus, jqXHR) {
+            var wikiarticleList = response[1];
+            // Initialize an article object.
+            var article = {title:"", url:""};
+            // Empty the articleList observable array.
+            self.articleList.removeAll();
+            // Loop through the response of Wikipedia articles and assign
+            // values to the article object names and then push the article
+            // objects into the observable array.
+            for (var i = 0; i < wikiarticleList.length; i++) {
+                article.title = wikiarticleList[i];
+                article.url = 'http://en.wikipedia.org/wiki/' + wikiarticleList[i];
+                self.articleList.push(article);
             }
-        });
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+              alert("failed to get wikipedia resources");
+            });
     };
 
     // Creates an observable variable where the user input comes in from the

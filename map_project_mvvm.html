@@ -40,7 +40,9 @@ throught the Wikipedia API. -->
                     <section class="row" id="wikipedia-box">
                         <h3>Wikipedia Articles</h3>
                       <article class="row" id="wikipedia">
-                        <ul id="wikipedia-links"></ul>
+                        <ul id="wikipedia-links" data-bind="foreach: articleList">
+                            <li><a href="" data-bind="attr: {href: url}, text:title" target="_blank"></a></li>
+                        </ul>
                       </article>
                     </section>
                 </div>
